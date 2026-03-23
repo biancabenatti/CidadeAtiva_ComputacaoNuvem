@@ -1,0 +1,249 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fcfcfc;
+    min-height: 100vh;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/Registrar.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+nav {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #f1f5f9;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav .Logo {
+    height: 50px;
+    width: auto;
+    margin-right: 5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    margin-left: 5rem;
+}
+
+nav a:hover {
+    color: #6DBFB0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.content {
+    width: 100%;
+    max-width: 900px;
+}
+
+.occurrences-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: #6DBFB0;
+    box-shadow: 0 12px 20px rgba(109, 191, 176, 0.12);
+}
+
+.card-info {
+    flex: 1;
+    
+}
+
+.card-label {
+    margin: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.card strong {
+    display: block;
+    color: #4d867c;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.text-data {
+    margin: 0 0 12px 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.text-description {
+    margin: 0;
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-image-preview {
+    flex: 0 0 120px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+}
+
+.card-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card {
+    display: flex;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.card-actions-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    left: -40px; /* joga para fora do card, mas ainda visível */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-icon {
+    background: #f1f5f9;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-icon i {
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.btn-icon.edit:hover i,
+.btn-icon.delete:hover i {
+    color: #ffffff;
+}
+
+.btn-icon.edit:hover {
+    background: #6DBFB0;
+}
+
+.btn-icon.delete:hover {
+    background: #EF4444; 
+}
+
+@media (max-width: 900px) {
+    .occurrences-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .card-image-preview {
+        width: 100%;
+        height: 150px;
+    }
+
+    .card strong {
+        font-size: 0.95rem;
+    }
+
+    .text-data {
+        font-size: 0.75rem;
+    }
+
+    .text-description {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .occurrences-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .card-image-preview {
+        height: 120px;
+    }
+
+    .card strong {
+        font-size: 0.9rem;
+    }
+
+    .text-data {
+        font-size: 0.7rem;
+    }
+
+    .text-description {
+        font-size: 0.8rem;
+    }
+}

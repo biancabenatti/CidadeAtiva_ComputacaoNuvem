@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Cidade Ativa</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link href="css/fontawesome-all.css" rel="stylesheet" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="css/swiper.css" rel="stylesheet" />
+    <link href="css/magnific-popup.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="icon" href="images/favicon.png" />
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <nav class="navbar fixed-top">
+        <div class="container sm:px-4 lg:px-8 flex flex-wrap items-center justify-between lg:flex-nowrap">
+
+            <a class="inline-block  text-xl" href="index.html">
+                <img src="images/Logo.png" class="h-16" />
+            </a>
+
+            <div class="navbar-collapse offcanvas-collapse lg:flex lg:flex-grow lg:items-center">
+                <ul class=" mt-2 mb-2 ml-auto flex flex-col list-none lg:flex-row mr-10">
+                    <li><a class="nav-link page-scroll active hover:text-green-500" href="#header">Início</a></li>
+                    <li><a class="nav-link page-scroll hover:text-green-500" href="#features">Funcionalidades</a></li>
+                    <li><a class="nav-link page-scroll hover:text-green-500" href="#details">Detalhes</a></li>
+                    <li><a class="nav-link page-scroll hover:text-green-500" href="#contato">Contato</a></li>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <header id="header" class="header py-28 text-center md:pt-20 lg:text-left xl:pt-44 xl:pb-32">
+        <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
+            <div class="mb-16 lg:mt-32 xl:mt-40 xl:mr-12">
+                <h1 class="h1-large mb-8">Ajude a melhorar sua cidade</h1>
+                <p class="p-large mb-8">
+                    Envie fotos, descreva problemas e informe o local de forma rápida e prática.
+                </p>
+                <a class="btn-solid-lg" href="registrar.html">
+                    Registrar ocorrência
+                </a>
+
+                <a class="btn-outline-lg" href="ocorrencias.html">
+                    Ver ocorrências
+                </a>
+            </div>
+            <div class="xl:text-right mt-12 ml-0">
+                <img class="inline" src="images/CidadeHome.png" alt="alternative" />
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Introdução -->
+    <div class="pt-4 pb-14 text-center">
+        <div class="container px-4 sm:px-8 xl:px-4">
+            <p class="mb-4 text-gray-800 text-3xl leading-10 lg:max-w-5xl lg:mx-auto">
+                O Cidade Ativa facilita a comunicação entre cidadãos e a cidade, permitindo o registro de problemas
+                urbanos de forma simples, rápida e eficiente.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Features -->
+    <div id="features" class="cards-1">
+        <div class="container px-4 sm:px-8 xl:px-4">
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Envio de fotos</h5>
+                    <p class="mb-4">Registre o problema enviando imagens pelo sistema</p>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-align-left"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Descrição detalhada</h5>
+                    <p class="mb-4">Explique o que está acontecendo de forma clara e objetiva</p>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Localização</h5>
+                    <p class="mb-4">Informe o endereço exato do problema na cidade</p>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Acompanhamento</h5>
+                    <p class="mb-4">Acompanhe o andamento das suas solicitações</p>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Notificações</h5>
+                    <p class="mb-4">Receba atualizações sobre o status dos problemas reportados</p>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="card">
+                <div class="card-image text-center text-gray-400 text-4xl">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Comunidade</h5>
+                    <p class="mb-4">Colabore com outras pessoas para melhorar a cidade</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Detalhes -->
+    <div id="details" class="pt-12 pb-16 lg:pt-16">
+        <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-12 lg:gap-x-16">
+
+            <div class="lg:col-span-5">
+                <div class="mb-16 lg:mb-0 xl:mt-16">
+                    <h2 class="mb-6">Sua participação faz a diferença</h2>
+                    <p class="mb-4">
+                        O sistema permite que qualquer pessoa registre problemas urbanos de forma rápida, contribuindo
+                        para uma cidade mais organizada e eficiente.
+                    </p>
+                    <p class="mb-4">
+                        Com informações claras e bem localizadas, fica mais fácil identificar, acompanhar e resolver
+                        situações do dia a dia.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 flex justify-center items-center">
+                <div class="xl:ml-14">
+                    <img class="w-4/5 mx-auto rounded-lg ml-20" src="images/ComentariosCidade.png" alt="alternative" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Estatísticas -->
+    <div class="counter">
+        <div class="container px-4 sm:px-8">
+
+            <div id="counter">
+
+                <div class="cell">
+                    <div class="counter-value number-count" data-count="128">1</div>
+                    <p class="counter-info">Reportados</p>
+                </div>
+
+                <div class="cell">
+                    <div class="counter-value number-count" data-count="76">1</div>
+                    <p class="counter-info">Resolvidos</p>
+                </div>
+
+                <div class="cell">
+                    <div class="counter-value number-count" data-count="54">1</div>
+                    <p class="counter-info">Em andamento</p>
+                </div>
+
+                <div class="cell">
+                    <div class="counter-value number-count" data-count="32">1</div>
+                    <p class="counter-info">Usuários ativos</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Testemunhos -->
+    <div class="slider-1 py-32 bg-gray">
+        <div class="container px-4 sm:px-8">
+            <h2 class="mb-12 text-center lg:max-w-xl lg:mx-auto">
+                O que os usuários estão dizendo
+            </h2>
+
+            <div class="slider-container">
+                <div class="swiper-container card-slider">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-1.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        Consegui registrar um problema na minha rua em poucos minutos.
+                                    </p>
+                                    <p class="testimonial-author">Ana Souza - Moradora</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-2.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        Agora consigo acompanhar se os problemas do meu bairro.
+                                    </p>
+                                    <p class="testimonial-author">Carlos Lima - Usuário</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-3.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        A ideia é ótima! Facilita muito a comunicação.
+                                    </p>
+                                    <p class="testimonial-author">Mariana Alves - Estudante</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-4.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        Gostei da possibilidade de adicionar fotos e localização.
+                                    </p>
+                                    <p class="testimonial-author">João Pereira - Usuário</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-5.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        Interface simples e direta. Qualquer pessoa consegue usar.
+                                    </p>
+                                    <p class="testimonial-author">Fernanda Rocha - Professora</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img class="card-image" src="images/testimonial-6.jpg" alt="alternative" />
+                                <div class="card-body">
+                                    <p class="italic mb-3">
+                                        Muito útil para ajudar a melhorar a cidade no dia a dia.
+                                    </p>
+                                    <p class="testimonial-author">Lucas Martins - Morador</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Contato -->
+    <div id="contato" class="contato-section">
+
+        <div class="contato-card">
+            <div class="card-body">
+
+                <div class="card-title" style="color: #eeeeee;">
+                    Fale com a gente
+                </div>
+
+                <form class="space-y-5">
+                    <input type="text" placeholder="Seu nome">
+                    <input type="email" placeholder="Seu e-mail">
+                    <textarea rows="4" placeholder="Sua mensagem"></textarea>
+
+                    <button type="submit">
+                        Enviar mensagem
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="copyright-links">
+                <a href="#">Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Contato</a>
+            </div>
+
+            <div class="copyright-text">
+                &copy; 2026 Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

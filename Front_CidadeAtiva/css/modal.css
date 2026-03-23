@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    margin: 8% auto;
+    padding: 35px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.modal h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #6DBFB0;
+    text-align: center;
+    margin: 0 0 25px 0;
+    letter-spacing: -0.02em;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal form label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.modal form input[type="text"],
+.modal form textarea {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: #f8fafc;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+.modal form textarea {
+    resize: none;
+    height: 130px;
+    line-height: 1.6;
+}
+
+.modal form input::placeholder,
+.modal form textarea::placeholder {
+    color: #94a3b8;
+}
+
+.modal form input:focus,
+.modal form textarea:focus {
+    border-color: #6DBFB0;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(109, 191, 176, 0.15);
+}
+
+.modal button[type="submit"] {
+    background: linear-gradient(135deg, #6DBFB0 0%, #5aa698 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(109, 191, 176, 0.2);
+}
+
+.modal button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(109, 191, 176, 0.3);
+    filter: brightness(1.05);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.4rem;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #ef4444;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        margin: 20% 15px;
+        padding: 25px 20px;
+    }
+    
+    .modal h2 {
+        font-size: 1.5rem;
+    }
+}
