@@ -4,7 +4,7 @@ Interface web do projeto Cidade Ativa, uma aplicação para registro e acompanha
 
 ---
 
-## 📌 Sobre o projeto
+## Sobre o projeto
 
 O Cidade Ativa permite que usuários registrem problemas na cidade, como:
 
@@ -17,28 +17,28 @@ Este repositório contém o **front-end**, desenvolvido com tecnologias web bás
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
-### 📝 Registrar ocorrência
+### Registrar ocorrência
 - Cadastro de título, localização e descrição
 - Validação de campos obrigatórios
 - Feedback visual com SweetAlert
 
-### 📄 Listar ocorrências
+### Listar ocorrências
 - Exibição dinâmica das ocorrências cadastradas
 - Dados vindos da API
 
-### ✏️ Editar ocorrência
+### Editar ocorrência
 - Modal para edição
 - Atualização em tempo real
 
-### 🗑️ Deletar ocorrência
+### Deletar ocorrência
 - Confirmação antes de excluir
 - Atualização automática da lista
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - HTML5
 - CSS3
@@ -48,7 +48,7 @@ Este repositório contém o **front-end**, desenvolvido com tecnologias web bás
 
 ---
 
-## 🔗 Integração com o back-end
+## Integração com o back-end
 
 Este front-end consome uma API REST desenvolvida em Node.js.
 
