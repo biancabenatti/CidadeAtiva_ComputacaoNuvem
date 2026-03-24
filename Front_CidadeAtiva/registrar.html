@@ -14,37 +14,40 @@
 </nav>
 
 <section class="registrar-container">
-    <div class="side-image">
-        </div>
+    <div class="side-image"></div>
 
     <div class="form-side">
-        <form>
+        <form id="formOcorrencia">
+            
             <div class="form-group">
                 <label>Título</label>
-                <input type="text" placeholder="Ex: Buraco na rua">
+                <input type="text" id="titulo" placeholder="Ex: Buraco na rua">
             </div>
 
             <div class="form-group">
                 <label>Localização</label>
-                <input type="text" placeholder="Ex: Rua das Flores, 123">
+                <input type="text" id="localizacao" placeholder="Ex: Rua das Flores, 123">
             </div>
 
             <div class="form-group">
                 <label>Descrição</label>
-                <textarea placeholder="Descreva o problema..."></textarea>
+                <textarea id="descricao" placeholder="Descreva o problema..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Foto da ocorrência</label>
-                <input type="file" accept="image/*">
+                <input type="file" id="foto" accept="image/*">
             </div>
 
-            <button class="btn-send">
+            <button class="btn-send" type="submit">
                 Enviar ocorrência
             </button>
+
         </form>
     </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/registrar.js"></script>
 
 </body>
 </html>
