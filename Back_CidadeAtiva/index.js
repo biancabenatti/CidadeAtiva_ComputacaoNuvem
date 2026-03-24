@@ -21,7 +21,7 @@ const swaggerOptions = {
       { url: 'http://localhost:5000' }
     ],
   },
-  apis: ['./routes/*.js'], // onde o Swagger vai ler as anotações
+  apis: ['./routes/*.js'], 
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
