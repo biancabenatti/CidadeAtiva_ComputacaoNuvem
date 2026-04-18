@@ -1,11 +1,12 @@
 const modal = document.getElementById('editModal');
 const closeBtn = document.querySelector('.close');
+const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://localhost:5000';
 
 let idAtual = null;
 
 // LISTAR
 async function carregarOcorrencias() {
-    const response = await fetch('http://localhost:5000/api/ocorrencias');
+    const response = await fetch(`${API_BASE_URL}/api/ocorrencias`);
     const dados = await response.json();
 
     const lista = document.querySelector('.occurrences-list');
@@ -55,7 +56,7 @@ async function deletarOcorrencia(id) {
     if (!confirmacao.isConfirmed) return;
 
     try {
-        await fetch(`http://localhost:5000/api/ocorrencias/${id}`, {
+        await fetch(`${API_BASE_URL}/api/ocorrencias/${id}`, {
             method: 'DELETE'
         });
 
@@ -107,7 +108,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
     };
 
     try {
-        await fetch(`http://localhost:5000/api/ocorrencias/${idAtual}`, {
+        await fetch(`${API_BASE_URL}/api/ocorrencias/${idAtual}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

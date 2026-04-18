@@ -1,4 +1,5 @@
 const form = document.getElementById('formOcorrencia');
+const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://localhost:5000';
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/api/ocorrencias', {
+        const response = await fetch(`${API_BASE_URL}/api/ocorrencias`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +26,11 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ titulo, localizacao, descricao })
         });
 
-        if (!response.ok) throw new Error();
+        if (!response.ok) {
+            const erroApi = await response.json().catch(() => null);
+            const mensagem = erroApi?.erro || 'Nao foi possivel registrar.';
+            throw new Error(mensagem);
+        }
 
         Swal.fire({
             icon: 'success',
@@ -39,7 +44,7 @@ form.addEventListener('submit', async (e) => {
         Swal.fire({
             icon: 'error',
             title: 'Erro!',
-            text: 'Não foi possível registrar.'
+            text: error.message
         });
     }
 });
