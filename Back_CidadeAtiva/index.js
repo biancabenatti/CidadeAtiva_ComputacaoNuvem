@@ -3,10 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
-const { connectMongo } = require('./database');
+const { connectMongo, connectRelational } = require('./database');
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 app.use(express.json());
 
 const swaggerOptions = {
@@ -29,7 +35,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rotas
 const ocorrenciasRoutes = require('./routes/ocorrencias');
+const uploadRoutes = require('./routes/upload');
 app.use('/api/ocorrencias', ocorrenciasRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.get('/', (req, res) => {
     res.send('Servidor Cidade Ativa rodando!');
@@ -40,11 +48,18 @@ const PORT = process.env.PORT || 5000;
 async function startServer() {
   try {
     await connectMongo();
-    app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
   } catch (error) {
-    console.error('Falha ao iniciar servidor:', error.message);
+    console.error('Falha ao conectar MongoDB:', error.message);
     process.exit(1);
   }
+
+  try {
+    await connectRelational();
+  } catch (error) {
+    console.warn('PostgreSQL indisponivel (imagens no Postgres desativadas):', error.message);
+  }
+
+  app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 }
 
 startServer();

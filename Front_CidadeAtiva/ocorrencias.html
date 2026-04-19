@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências - Cidade Ativa</title>
+    <!-- Abra com Live Server (ou outro http://) para a lista carregar; file:// costuma bloquear chamadas à API. -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="css/ocorrencias.css" rel="stylesheet">
     <link href="css/modal.css" rel="stylesheet">
@@ -23,32 +24,7 @@
     <main class="container">
         <section class="content">
 
-            <div class="occurrences-list">
-                <div class="card">
-                    <div class="card-info">
-                        <strong>Buraco na rua</strong>
-
-                        <p class="card-label">Localização</p>
-                        <p class="text-data">Rua das Flores, 123</p>
-
-                        <p class="card-label">Descrição</p>
-                        <p class="text-description">Existe um buraco enorme que está causando acidentes na via principal.</p>
-                    </div>
-
-                    <div class="card-actions-vertical">
-                        <button class="btn-icon edit" title="Editar">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
-                        <button class="btn-icon delete" title="Deletar">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-
-                    <div class="card-image-preview">
-                        <img src="images/Registrar.jpg" alt="Foto da ocorrência">
-                    </div>
-                </div>
-            </div>
+            <div class="occurrences-list" aria-live="polite"></div>
         </section>
     </main>
     <div id="editModal" class="modal">
