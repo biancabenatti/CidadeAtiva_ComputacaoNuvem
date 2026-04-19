@@ -75,6 +75,14 @@ nav a:hover {
     gap: 20px;
 }
 
+.occurrences-status {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
 .card {
     background: rgba(255, 255, 255, 0.98);
     border: 1px solid #e2e8f0;
