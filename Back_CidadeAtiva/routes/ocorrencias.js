@@ -117,6 +117,7 @@
 const express = require('express');
 const router = express.Router();
 const Ocorrencia = require('../models/Ocorrencia');
+const { imagemParaRespostaCliente } = require('../services/s3');
 const {
     upsertImagemOcorrencia,
     getImagemPorOcorrenciaId,
@@ -140,7 +141,9 @@ router.post('/', async (req, res) => {
             await upsertImagemOcorrencia(ocorrencia._id.toString(), imagem);
         }
 
-        res.status(201).json(ocorrencia);
+        const criado = ocorrencia.toObject();
+        criado.imagem = await imagemParaRespostaCliente(criado.imagem);
+        res.status(201).json(criado);
     } catch (err) {
         res.status(400).json({ erro: err.message });
     }
@@ -154,14 +157,17 @@ router.get('/', async (req, res) => {
         const ids = ocorrencias.map((item) => item._id.toString());
         const imagensMap = await getImagensPorOcorrenciaIds(ids);
 
-        const ocorrenciasComImagem = ocorrencias.map((item) => {
-            const ocorrenciaObj = item.toObject();
-            const idStr = ocorrenciaObj._id.toString();
-            return {
-                ...ocorrenciaObj,
-                imagem: imagensMap[idStr] || ocorrenciaObj.imagem || null,
-            };
-        });
+        const ocorrenciasComImagem = await Promise.all(
+            ocorrencias.map(async (item) => {
+                const ocorrenciaObj = item.toObject();
+                const idStr = ocorrenciaObj._id.toString();
+                const raw = imagensMap[idStr] || ocorrenciaObj.imagem || null;
+                return {
+                    ...ocorrenciaObj,
+                    imagem: await imagemParaRespostaCliente(raw),
+                };
+            })
+        );
 
         res.json(ocorrenciasComImagem);
     } catch (err) {
@@ -180,7 +186,8 @@ router.get('/:id', async (req, res) => {
 
         const imagemPg = await getImagemPorOcorrenciaId(req.params.id);
         const resposta = ocorrencia.toObject();
-        resposta.imagem = imagemPg || resposta.imagem || null;
+        const raw = imagemPg || resposta.imagem || null;
+        resposta.imagem = await imagemParaRespostaCliente(raw);
 
         return res.json(resposta);
     } catch (err) {
@@ -188,28 +195,32 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ATUALIZAR
+// ATUALIZAR (imagem: nova URL, omitir para manter, null ou "" para remover)
 router.put('/:id', async (req, res) => {
     try {
         const { imagem, ...dadosOcorrencia } = req.body;
-        const updatePayload = { ...dadosOcorrencia };
-        if (imagem !== undefined) {
-            updatePayload.imagem = imagem;
+        const id = req.params.id;
+
+        const mongoUpdate = { ...dadosOcorrencia };
+
+        if (imagem === null || imagem === '') {
+            mongoUpdate.$unset = { imagem: '' };
+            await deleteImagemPorOcorrenciaId(id);
+        } else if (imagem !== undefined) {
+            mongoUpdate.imagem = imagem;
+            await upsertImagemOcorrencia(id, imagem);
         }
 
-        const ocorrencia = await Ocorrencia.findByIdAndUpdate(req.params.id, updatePayload, { new: true });
+        const ocorrencia = await Ocorrencia.findByIdAndUpdate(id, mongoUpdate, { new: true });
 
         if (!ocorrencia) {
             return res.status(404).json({ erro: 'Ocorrencia nao encontrada' });
         }
 
-        if (imagem) {
-            await upsertImagemOcorrencia(req.params.id, imagem);
-        }
-
-        const imagemPg = await getImagemPorOcorrenciaId(req.params.id);
+        const imagemPg = await getImagemPorOcorrenciaId(id);
         const resposta = ocorrencia.toObject();
-        resposta.imagem = imagemPg || resposta.imagem || null;
+        const raw = imagemPg || resposta.imagem || null;
+        resposta.imagem = await imagemParaRespostaCliente(raw);
 
         return res.json(resposta);
     } catch (err) {

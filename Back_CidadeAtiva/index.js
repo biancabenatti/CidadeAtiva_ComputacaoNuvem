@@ -59,7 +59,10 @@ async function startServer() {
     console.warn('PostgreSQL indisponivel (imagens no Postgres desativadas):', error.message);
   }
 
-  app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`  http://127.0.0.1:${PORT}  |  http://localhost:${PORT}`);
+  });
 }
 
 startServer();

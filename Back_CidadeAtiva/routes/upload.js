@@ -26,6 +26,7 @@
  *         description: Requisicao invalida
  */
 
+const path = require('path');
 const express = require('express');
 const multer = require('multer');
 const { uploadToS3 } = require('../services/s3');
@@ -34,11 +35,16 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    if (!file.mimetype.startsWith('image/')) {
-      cb(new Error('Apenas arquivos de imagem sao permitidos.'));
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
       return;
     }
-    cb(null, true);
+    const ext = path.extname(file.originalname || '').toLowerCase();
+    if (ext === '.webp') {
+      cb(null, true);
+      return;
+    }
+    cb(new Error('Apenas arquivos de imagem sao permitidos.'));
   },
 });
 
@@ -66,9 +72,17 @@ router.post('/', (req, res, next) => {
       ? req.body.prefix.trim()
       : 'ocorrencias';
 
+    let contentType = req.file.mimetype;
+    if (!contentType.startsWith('image/')) {
+      const ext = path.extname(req.file.originalname || '').toLowerCase();
+      if (ext === '.webp') {
+        contentType = 'image/webp';
+      }
+    }
+
     const resultado = await uploadToS3({
       buffer: req.file.buffer,
-      contentType: req.file.mimetype,
+      contentType,
       originalName: req.file.originalname,
       prefix,
     });
