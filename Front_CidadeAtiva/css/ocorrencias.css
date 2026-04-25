@@ -92,6 +92,7 @@ nav a:hover {
     gap: 20px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
 }
 
 .card:hover {
@@ -158,6 +159,7 @@ nav a:hover {
     position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .card-actions-vertical {

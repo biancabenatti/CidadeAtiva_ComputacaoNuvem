@@ -1,8 +1,29 @@
-const { Pool } = require('pg');
+const { Pool } = require("pg");
+const fs = require("fs");
+const path = require("path");
 
 let pool;
 /** Só true após connectRelational() concluir com sucesso. */
 let relationalReady = false;
+
+function getSslConfig() {
+  const certPath = path.resolve(
+    process.cwd(),
+    process.env.PGSSLROOTCERT || "global-bundle.pem",
+  );
+
+  try {
+    return {
+      rejectUnauthorized: true,
+      ca: fs.readFileSync(certPath, "utf8"),
+    };
+  } catch (e) {
+    console.warn(
+      `Certificado SSL do PostgreSQL não encontrado em ${certPath}: ${e.message}`,
+    );
+    return { rejectUnauthorized: false };
+  }
+}
 
 function isRelationalReady() {
   return relationalReady;
@@ -14,7 +35,15 @@ function getPool() {
   }
 
   if (process.env.POSTGRES_URL) {
-    pool = new Pool({ connectionString: process.env.POSTGRES_URL });
+    const parsed = new URL(process.env.POSTGRES_URL);
+    pool = new Pool({
+      host: parsed.hostname,
+      port: parsed.port ? Number(parsed.port) : 5432,
+      user: decodeURIComponent(parsed.username),
+      password: decodeURIComponent(parsed.password),
+      database: parsed.pathname.replace(/^\//, ""),
+      ssl: getSslConfig(),
+    });
     return pool;
   }
 
@@ -24,6 +53,7 @@ function getPool() {
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
+    ssl: getSslConfig(),
   });
   return pool;
 }
@@ -48,7 +78,7 @@ async function connectRelational() {
   `);
 
   relationalReady = true;
-  console.log('PostgreSQL conectado!');
+  console.log("PostgreSQL conectado!");
 }
 
 async function upsertImagemOcorrencia(ocorrenciaId, imageUrl) {
@@ -64,7 +94,7 @@ async function upsertImagemOcorrencia(ocorrenciaId, imageUrl) {
       image_url = EXCLUDED.image_url,
       updated_at = NOW();
     `,
-    [ocorrenciaId, imageUrl]
+    [ocorrenciaId, imageUrl],
   );
 }
 
@@ -73,13 +103,13 @@ async function getImagemPorOcorrenciaId(ocorrenciaId) {
   try {
     const relationalPool = getPool();
     const result = await relationalPool.query(
-      'SELECT image_url FROM ocorrencia_imagens WHERE ocorrencia_id = $1',
-      [ocorrenciaId]
+      "SELECT image_url FROM ocorrencia_imagens WHERE ocorrencia_id = $1",
+      [ocorrenciaId],
     );
 
     return result.rows[0]?.image_url || null;
   } catch (e) {
-    console.warn('Postgres (getImagemPorOcorrenciaId):', e.message);
+    console.warn("Postgres (getImagemPorOcorrenciaId):", e.message);
     return null;
   }
 }
@@ -95,7 +125,7 @@ async function getImagensPorOcorrenciaIds(ocorrenciaIds) {
       FROM ocorrencia_imagens
       WHERE ocorrencia_id = ANY($1::varchar[]);
       `,
-      [ocorrenciaIds]
+      [ocorrenciaIds],
     );
 
     return result.rows.reduce((acc, row) => {
@@ -103,7 +133,7 @@ async function getImagensPorOcorrenciaIds(ocorrenciaIds) {
       return acc;
     }, {});
   } catch (e) {
-    console.warn('Postgres (getImagensPorOcorrenciaIds):', e.message);
+    console.warn("Postgres (getImagensPorOcorrenciaIds):", e.message);
     return {};
   }
 }
@@ -113,11 +143,11 @@ async function deleteImagemPorOcorrenciaId(ocorrenciaId) {
   try {
     const relationalPool = getPool();
     await relationalPool.query(
-      'DELETE FROM ocorrencia_imagens WHERE ocorrencia_id = $1',
-      [ocorrenciaId]
+      "DELETE FROM ocorrencia_imagens WHERE ocorrencia_id = $1",
+      [ocorrenciaId],
     );
   } catch (e) {
-    console.warn('Postgres (deleteImagemPorOcorrenciaId):', e.message);
+    console.warn("Postgres (deleteImagemPorOcorrenciaId):", e.message);
   }
 }
 

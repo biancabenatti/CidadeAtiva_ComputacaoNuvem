@@ -27,14 +27,49 @@
             <div class="occurrences-list" aria-live="polite"></div>
         </section>
     </main>
+
+    <div id="viewModal" class="modal">
+        <div class="modal-content modal-content--wide">
+            <span class="close close-view" title="Fechar">&times;</span>
+            <h2>Visualizar ocorrência</h2>
+            <div class="view-body">
+                <p class="card-label">Título</p>
+                <p id="viewTitulo" class="view-text"></p>
+                <p class="card-label">Localização</p>
+                <p id="viewLocalizacao" class="view-text"></p>
+                <p class="card-label">Descrição</p>
+                <p id="viewDescricao" class="view-text view-text--desc"></p>
+                <div id="viewImagemWrap" class="view-imagem-wrap" hidden>
+                    <p class="card-label">Foto</p>
+                    <img id="viewImagem" class="view-imagem" src="" alt="Foto da ocorrência">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <div class="modal-content modal-content--wide">
+            <span class="close close-edit" title="Fechar">&times;</span>
             <h2>Editar Ocorrência</h2>
             <form id="editForm">
+                <label for="editTitle">Título</label>
                 <input type="text" id="editTitle" placeholder="Título">
+                <label for="editLocation">Localização</label>
                 <input type="text" id="editLocation" placeholder="Localização">
+                <label for="editDescription">Descrição</label>
                 <textarea id="editDescription" placeholder="Descrição"></textarea>
+
+                <label>Foto da ocorrência</label>
+                <div class="edit-foto-row">
+                    <div id="editImagemPreviewWrap" class="edit-imagem-preview-wrap" hidden>
+                        <img id="editImagemPreview" src="" alt="Pré-visualização">
+                    </div>
+                    <div class="edit-foto-actions">
+                        <input type="file" id="editFoto" accept="image/*,.webp,image/webp">
+                        <button type="button" id="editRemoverFoto" class="btn-modal-secondary">Remover foto atual</button>
+                    </div>
+                </div>
+
                 <button type="submit">Salvar</button>
             </form>
         </div>

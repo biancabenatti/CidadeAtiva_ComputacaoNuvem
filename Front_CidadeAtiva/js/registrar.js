@@ -1,11 +1,22 @@
 const form = document.getElementById('formOcorrencia');
-const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://127.0.0.1:5000';
+
+/** MIME image/* ou extensão conhecida (alguns SOs enviam WebP com tipo vazio ou genérico). */
+function arquivoEhImagemPermitida(file) {
+    if (!file) return true;
+    const mime = (file.type || '').toLowerCase();
+    if (mime.startsWith('image/')) return true;
+    const nome = (file.name || '').toLowerCase();
+    return /\.(jpe?g|png|gif|webp)$/i.test(nome);
+}
 
 function mensagemErroRede(error) {
     if (error && (error.message === 'Failed to fetch' || error.name === 'TypeError')) {
         return 'Não foi possível conectar à API em '
             + API_BASE_URL
-            + '. Verifique se o backend está rodando (porta 5000) e se você abriu esta página por HTTP (Live Server), não como file://.';
+            + '. 1) Rode o backend (npm run dev em Back_CidadeAtiva). 2) No navegador, abra '
+            + API_BASE_URL
+            + ' — deve aparecer "Servidor Cidade Ativa rodando!". 3) Use Live Server (http://), não file://. 4) Se a API estiver em outra porta, use na URL: ?api=http://127.0.0.1:PORTA';
     }
     return error?.message || 'Erro desconhecido.';
 }
@@ -24,6 +35,15 @@ form.addEventListener('submit', async (e) => {
             icon: 'warning',
             title: 'Campos obrigatórios!',
             text: 'Preencha título, localização e descrição.',
+        });
+        return;
+    }
+
+    if (arquivo && !arquivoEhImagemPermitida(arquivo)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Arquivo não suportado',
+            text: 'Use imagem JPG, PNG, GIF ou WebP.',
         });
         return;
     }
