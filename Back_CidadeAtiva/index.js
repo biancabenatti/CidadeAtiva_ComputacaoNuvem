@@ -4,6 +4,10 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const { connectMongo, connectRelational } = require('./database');
+const fs = require('fs');
+const path = require('path');
+
+const logFile = path.join(__dirname, 'logs', 'app.log');
 
 const app = express();
 app.use(
@@ -45,6 +49,14 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+function writeLog(message) {
+  const timestamp = new Date().toISOString();
+  fs.appendFileSync(
+    logFile,
+    `[${timestamp}] ${message}\n`
+  );
+}
+
 async function startServer() {
   try {
     await connectMongo();
@@ -61,6 +73,7 @@ async function startServer() {
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Servidor rodando na porta ${PORT}`);
+    writeLog(`Servidor rodando na porta ${PORT}`);
     console.log(`  http://127.0.0.1:${PORT}  |  http://localhost:${PORT}`);
   });
 }

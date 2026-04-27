@@ -1,0 +1,6 @@
+[INFO] CidadeAtiva API iniciando...
+[INFO] Conexão com MongoDB iniciada
+[INFO] Conexão com PostgreSQL iniciada
+[INFO] Servidor rodando na porta 5000
+[INFO] Swagger disponível em /api-docs
+[INFO] Rotas carregadas: /api/ocorrencias, /api/upload
