@@ -62,7 +62,7 @@ async function startServer() {
     await connectMongo();
   } catch (error) {
     console.error('Falha ao conectar MongoDB:', error.message);
-    process.exit(1);
+    //process.exit(1);
   }
 
   try {
