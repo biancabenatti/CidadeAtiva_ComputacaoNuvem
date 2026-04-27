@@ -51,7 +51,7 @@ function resolveApiBaseUrl() {
   if (fromDotEnv) {
     return fromDotEnv
   }
-  const h = window.location.hostname
+  const h = window.location.origin
   if (h === 'localhost' || h === '127.0.0.1') {
     return `http://${h}:5000`
   }
