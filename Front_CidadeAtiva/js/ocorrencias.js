@@ -48,7 +48,7 @@ async function carregarOcorrencias() {
   lista.innerHTML = '<p class="occurrences-status">Carregando ocorrências…</p>';
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/ocorrencias`);
+    const response = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/ocorrencias`);
     if (!response.ok) {
       const body = await response.json().catch(() => null);
       const detalhe = body?.erro ? String(body.erro) : `HTTP ${response.status}`;
@@ -121,7 +121,7 @@ async function deletarOcorrencia(id) {
   if (!confirmacao.isConfirmed) return;
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/ocorrencias/${id}`, {
+    const res = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/ocorrencias/${id}`, {
       method: 'DELETE',
     });
     if (!res.ok) {
@@ -183,7 +183,7 @@ async function abrirModalEditar(id) {
   resetEditImagemUi();
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/ocorrencias/${id}`);
+    const res = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/ocorrencias/${id}`);
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       throw new Error(body.erro || 'Ocorrência não encontrada.');
@@ -308,7 +308,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
         const formData = new FormData();
         formData.append('arquivo', file);
         formData.append('prefix', 'ocorrencias');
-        const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
+        const uploadRes = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/upload`, {
           method: 'POST',
           body: formData,
         });
@@ -346,7 +346,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/ocorrencias/${idAtual}`, {
+    const res = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/ocorrencias/${idAtual}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
