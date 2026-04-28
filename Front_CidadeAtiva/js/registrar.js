@@ -66,7 +66,7 @@ form.addEventListener('submit', async (e) => {
             formData.append('arquivo', arquivo);
             formData.append('prefix', 'ocorrencias');
 
-            const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
+            const uploadRes = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/upload`, {
                 method: 'POST',
                 body: formData,
             });
@@ -92,7 +92,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/api/ocorrencias`, {
+        const response = await fetch(`${window.APP_CONFIG.API_BASE_URL}/api/ocorrencias`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
